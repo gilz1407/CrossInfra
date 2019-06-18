@@ -28,6 +28,7 @@ class BasicFunc:
     @classmethod
     def searchTemplate(cls, lst, expLength):
         middle = cls.findTemplates(lst, expLength)
+
         index = middle
         while lst[index-1] == expLength:
             index = index-1
