@@ -34,10 +34,10 @@ class Combination:
         global thisdict
         y = 0
         for x in list(itertools.product(self.countCombination['first'],self.countCombination['sec'], self.countCombination['third'], self.countCombination['four'])):
-            self.finalLst[self.constants[0]] = self.CreateSequence(x, 0, self.dynamicBarMap['first'],'first')
-            self.finalLst[self.constants[1]] = self.CreateSequence(x, 1, self.dynamicBarMap['sec'],'sec')
-            self.finalLst[self.constants[2]] = self.CreateSequence(x, 2, self.dynamicBarMap['third'],'third')
-            self.finalLst[self.constants[3]] = self.CreateSequence(x, 3, self.dynamicBarMap['four'],'four')
+            self.finalLst[self.constants[0]] = self.CreateSequence(x, 0, self.dynamicBarMap['first'])
+            self.finalLst[self.constants[1]] = self.CreateSequence(x, 1, self.dynamicBarMap['sec'])
+            self.finalLst[self.constants[2]] = self.CreateSequence(x, 2, self.dynamicBarMap['third'])
+            self.finalLst[self.constants[3]] = self.CreateSequence(x, 3, self.dynamicBarMap['four'])
             temp = self.finalLst
             combinationsLst.append([temp[:], 0, BasicFunc.BasicFunc.listLength(temp),thisdict,calcTemplateName,[[],[],[],[],[],-1],""]) #combination tuple(items,start,length,templateName,graph details,title)
             thisdict = {
@@ -52,25 +52,10 @@ class Combination:
         #print('\n'.join(map(str,combinationsLst)))
         #print("total ", y)
 
-    def CreateSequence(self, combination, counter, lst, dynamicSetName):
-        survivals = []
+    def CreateSequence(self,combination,counter,lst):
+        survivals=[]
         for item in range(0, combination[counter]):
             survivals.append(lst[item])
-        if dynamicSetName == "first": #3-6
-            thisdict[lst[-1]+1] = (lst[0])+len(survivals)
-        elif dynamicSetName == "sec": #8-14
-            thisdict[lst[0]] = thisdict[lst[0]-1]+1
-            thisdict[lst[-1]] = thisdict[lst[0]]
-            thisdict[lst[-1]+1] = thisdict[lst[0]] + len(survivals)
-        elif dynamicSetName == "third": #16-20
-            thisdict[lst[0]] = thisdict[lst[0] - 1] + 1
-            thisdict[lst[-1]] = thisdict[lst[0]]
-            thisdict[lst[-1] + 1] = thisdict[lst[0]] + len(survivals)
-        elif dynamicSetName == "four": #22-31
-            thisdict[lst[0]] = thisdict[lst[0] - 1] + 1
-            thisdict[lst[-1]] = thisdict[lst[0]]
-            thisdict[lst[-1] + 1] = thisdict[lst[0]] + len(survivals)
-            thisdict[lst[-1] + 2] = thisdict[lst[-1] + 1] + 1
         return survivals
 
     @classmethod
