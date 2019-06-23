@@ -1,4 +1,5 @@
 import configparser
+import json
 
 from flask import Flask
 from Combination import Combination
@@ -10,7 +11,7 @@ def GetCombinations():
     global comb
     if comb is None:
         comb = Combination()
-    return str(comb.InitCombinations())
+    return json.dumps(comb.InitCombinations())
 
 
 if __name__ == '__main__':
